@@ -7,15 +7,9 @@ import classNames from 'classnames';
 
 type Props = {
   todos: Todo;
-  todoStatusChange: (id: number) => void;
-  deleteTodo: (id: number) => void;
 };
 
-export const TodoItem: React.FC<Props> = ({
-  todos,
-  todoStatusChange,
-  deleteTodo,
-}) => {
+export const TodoItem: React.FC<Props> = ({ todos }) => {
   return (
     <div
       data-cy="Todo"
@@ -28,7 +22,6 @@ export const TodoItem: React.FC<Props> = ({
           type="checkbox"
           className="todo__status"
           checked={todos.completed}
-          onChange={() => todoStatusChange(todos.id)}
         />
       </label>
 
@@ -37,12 +30,7 @@ export const TodoItem: React.FC<Props> = ({
       </span>
 
       {/* Remove button appears only on hover */}
-      <button
-        type="button"
-        className="todo__remove"
-        data-cy="TodoDelete"
-        onClick={() => deleteTodo(todos.id)}
-      >
+      <button type="button" className="todo__remove" data-cy="TodoDelete">
         ×
       </button>
 

@@ -4,26 +4,13 @@ import React from 'react';
 
 type Props = {
   filteredTodo: Todo[];
-  todoStatusChange: (id: number) => void;
-  deleteTodo: (id: number) => void;
 };
 
-export const TodoList: React.FC<Props> = ({
-  filteredTodo,
-  todoStatusChange,
-  deleteTodo,
-}) => {
+export const TodoList: React.FC<Props> = ({ filteredTodo }) => {
   return (
     <section className="todoapp__main" data-cy="TodoList">
       {filteredTodo.map(todo => {
-        return (
-          <TodoItem
-            key={todo.id}
-            todoStatusChange={todoStatusChange}
-            deleteTodo={deleteTodo}
-            todos={todo}
-          />
-        );
+        return <TodoItem key={todo.id} todos={todo} />;
       })}
     </section>
   );

@@ -35,14 +35,6 @@ export const App: React.FC = () => {
 
   useEffect(loadTodo, []);
 
-  const todoStatusChange = (id: number) => {
-    setTodos(prevTodo =>
-      prevTodo.map(todo =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-      ),
-    );
-  };
-
   const filteredTodo = todos.filter(todo => {
     switch (filteredStatus) {
       case FilteredStatus.ACTIVE:
@@ -56,21 +48,6 @@ export const App: React.FC = () => {
     }
   });
 
-  const deleteTodo = (todoId: number) => {
-    setTodos(prevTodo => prevTodo.filter(todo => todo.id !== todoId));
-  };
-
-  const changeCompletedTodos = () => {
-    const allCompleted = todos.every(todo => todo.completed);
-
-    setTodos(
-      todos.map(todo => ({
-        ...todo,
-        completed: !allCompleted,
-      })),
-    );
-  };
-
   const deleteAllCompletedTodo = () => {
     setTodos(todos.filter(todo => !todo.completed));
   };
@@ -80,17 +57,9 @@ export const App: React.FC = () => {
       <h1 className="todoapp__title">todos</h1>
 
       <div className="todoapp__content">
-        <Header todos={todos} changeCompletedTodos={changeCompletedTodos} />
+        <Header todos={todos} />
 
-        {loading ? (
-          <div>Loading</div>
-        ) : (
-          <TodoList
-            filteredTodo={filteredTodo}
-            todoStatusChange={todoStatusChange}
-            deleteTodo={deleteTodo}
-          />
-        )}
+        {!loading && <TodoList filteredTodo={filteredTodo} />}
 
         {/* Hide the footer if there are no todos */}
         {todos.length > 0 && (

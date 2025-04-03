@@ -4,10 +4,9 @@ import classNames from 'classnames';
 
 type Props = {
   todos: Todo[];
-  changeCompletedTodos: () => void;
 };
 
-export const Header: React.FC<Props> = ({ todos, changeCompletedTodos }) => {
+export const Header: React.FC<Props> = ({ todos }) => {
   return (
     <header className="todoapp__header">
       {/* this button should have `active` class only if all todos are completed */}
@@ -17,7 +16,6 @@ export const Header: React.FC<Props> = ({ todos, changeCompletedTodos }) => {
           active: todos.every(todo => todo.completed),
         })}
         data-cy="ToggleAllButton"
-        onClick={() => changeCompletedTodos}
       />
 
       {/* Add a todo on form submit */}
